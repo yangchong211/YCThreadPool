@@ -1,4 +1,4 @@
-package cn.ycbjie.ycthreadpoollib;
+package cn.ycbjie.ycthreadpoollib.factory;
 
 import android.support.annotation.NonNull;
 
@@ -14,12 +14,13 @@ import java.util.concurrent.ThreadFactory;
  *     revise:
  * </pre>
  */
-public class DefaultFactory implements ThreadFactory {
+public class MyThreadFactory implements ThreadFactory {
 
     private int priority;
-    DefaultFactory(int priority) {
+    public MyThreadFactory(int priority) {
         this.priority = priority;
     }
+
 
     @Override
     public Thread newThread(@NonNull Runnable runnable) {

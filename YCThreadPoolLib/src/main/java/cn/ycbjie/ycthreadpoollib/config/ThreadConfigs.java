@@ -1,6 +1,7 @@
 package cn.ycbjie.ycthreadpoollib.config;
 
 import java.util.concurrent.Executor;
+
 import cn.ycbjie.ycthreadpoollib.callback.AsyncCallback;
 import cn.ycbjie.ycthreadpoollib.callback.ThreadCallback;
 
@@ -17,23 +18,26 @@ import cn.ycbjie.ycthreadpoollib.callback.ThreadCallback;
 
 public final class ThreadConfigs {
     /**
-     * thread name
+     * 线程的名称
+     * 通过setName方法设置
      */
     public String name;
     /**
-     * thread callback
-     */
-    public ThreadCallback callback;
-    /**
-     * delay time
+     * 线程执行延迟的时间
+     * 通过setDelay方法设置
      */
     public long delay;
     /**
-     * thread deliver
+     * 线程执行者
+     * JAVA或者ANDROID
      */
     public Executor deliver;
     /**
-     * asyncCallback
+     * 用户任务的状态回调callback
+     */
+    public ThreadCallback callback;
+    /**
+     * 异步callback回调callback
      */
     public AsyncCallback asyncCallback;
 }

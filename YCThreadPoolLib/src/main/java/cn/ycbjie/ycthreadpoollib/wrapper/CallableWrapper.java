@@ -3,10 +3,10 @@ package cn.ycbjie.ycthreadpoollib.wrapper;
 
 import java.util.concurrent.Callable;
 
-import cn.ycbjie.ycthreadpoollib.CallbackDelegate;
-import cn.ycbjie.ycthreadpoollib.ThreadTools;
+import cn.ycbjie.ycthreadpoollib.callback.NormalCallback;
 import cn.ycbjie.ycthreadpoollib.callback.ThreadCallback;
 import cn.ycbjie.ycthreadpoollib.config.ThreadConfigs;
+import cn.ycbjie.ycthreadpoollib.utils.ThreadToolUtils;
 
 /**
  * <pre>
@@ -23,22 +23,48 @@ public final class CallableWrapper<T> implements Callable<T> {
     private ThreadCallback callback;
     private Callable<T> proxy;
 
+    /**
+     * 构造方法
+     * @param configs               thread配置，主要参数有：线程name，延迟time，回调callback，异步callback
+     * @param proxy                 线程优先级
+     */
     public CallableWrapper(ThreadConfigs configs, Callable<T> proxy) {
         this.name = configs.name;
         this.proxy = proxy;
-        this.callback = new CallbackDelegate(configs.callback, configs.deliver, configs.asyncCallback);
+        this.callback = new NormalCallback(configs.callback, configs.deliver, configs.asyncCallback);
     }
 
+    /**
+     * 详细可以看我的GitHub：https://github.com/yangchong211
+     * 自定义Callable继承Callable<T>类，Callable 是在 JDK1.5 增加的。
+     * Callable 的 call() 方法可以返回值和抛出异常
+     * @return                      泛型
+     * @throws Exception            异常
+     */
     @Override
-    public T call() throws Exception {
-        ThreadTools.resetThread(Thread.currentThread(),name,callback);
+    public T call() {
+        ThreadToolUtils.resetThread(Thread.currentThread(),name,callback);
         if (callback != null) {
+            //开始
             callback.onStart(name);
         }
-        T t = proxy == null ? null : proxy.call();
-        if (callback != null)  {
-            callback.onCompleted(name);
+        T t = null;
+        try {
+            t = proxy == null ? null : proxy.call();
+        } catch (Exception e) {
+            e.printStackTrace();
+            //异常错误
+            if(callback!=null){
+                callback.onError(name,e);
+            }
+        }finally {
+            //完成
+            if (callback != null)  {
+                callback.onCompleted(name);
+            }
         }
         return t;
     }
+
+
 }

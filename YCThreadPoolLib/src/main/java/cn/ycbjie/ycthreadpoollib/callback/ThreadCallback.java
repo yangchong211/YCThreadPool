@@ -5,8 +5,9 @@ package cn.ycbjie.ycthreadpoollib.callback;
  * <pre>
  *     @author: yangchong
  *     blog  : https://github.com/yangchong211
- *     time  : 2017/08/22
+ *     time  :
  *     desc  : 一个回调接口，用于通知用户任务的状态回调委托类
+ *             线程的名字可以自定义
  *     revise:
  * </pre>
  */
@@ -30,4 +31,6 @@ public interface ThreadCallback {
      * @param threadName            正在运行线程的名字
      */
     void onStart(String threadName);
+
+
 }
