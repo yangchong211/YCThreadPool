@@ -1,4 +1,4 @@
-package cn.ycbjie.ycthreadpoollib;
+package cn.ycbjie.ycthreadpoollib.utils;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
