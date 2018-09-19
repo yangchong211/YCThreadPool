@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
+import android.util.Log;
 
 
 /**
@@ -26,8 +28,11 @@ public class InitializeService extends IntentService {
         context.startService(intent);
     }
 
-
+    /**
+     * 在构造函数中传入线程名字
+     **/
     public InitializeService(){
+        //注意这里需要写类的名称
         super("InitializeService");
     }
 
@@ -41,9 +46,21 @@ public class InitializeService extends IntentService {
         }
     }
 
-    private void initApplication() {
-        //处理耗时操作和避免在application做过多初始化工作，比如初始化数据库等等
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Log.e("初始化","onCreate");
     }
 
+    private void initApplication() {
+        //处理耗时操作和避免在application做过多初始化工作，比如初始化数据库等等
+        Log.e("初始化","initApplication");
+    }
+
+    @Override
+    public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
+        Log.e("初始化","onStartCommand");
+        return super.onStartCommand(intent, flags, startId);
+    }
 
 }

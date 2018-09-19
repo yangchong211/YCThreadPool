@@ -3,7 +3,7 @@ package cn.ycbjie.ycthreadpoollib.callback;
 
 /**
  * <pre>
- *     @author: yangchong
+ *     @author yangchong
  *     blog  : https://github.com/yangchong211
  *     time  :
  *     desc  : 一个回调接口，用于通知用户任务的状态回调委托类

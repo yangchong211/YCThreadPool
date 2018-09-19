@@ -23,7 +23,7 @@ import cn.ycbjie.ycthreadpoollib.wrapper.RunnableWrapper;
 
 /**
  * <pre>
- *     @author: yangchong
+ *     @author yangchong
  *     blog  : https://www.jianshu.com/p/53017c3fc75d
  *     time  : 2017/08/22
  *     desc  : 线程池

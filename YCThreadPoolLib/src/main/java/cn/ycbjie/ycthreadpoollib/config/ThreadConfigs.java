@@ -8,7 +8,7 @@ import cn.ycbjie.ycthreadpoollib.callback.ThreadCallback;
 
 /**
  * <pre>
- *     @author: yangchong
+ *     @author yangchong
  *     blog  : https://github.com/yangchong211
  *     time  : 2017/08/22
  *     desc  : 存储当前任务的某些配置
@@ -17,6 +17,7 @@ import cn.ycbjie.ycthreadpoollib.callback.ThreadCallback;
  */
 
 public final class ThreadConfigs {
+
     /**
      * 线程的名称
      * 通过setName方法设置
@@ -40,4 +41,5 @@ public final class ThreadConfigs {
      * 异步callback回调callback
      */
     public AsyncCallback asyncCallback;
+
 }

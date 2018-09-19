@@ -7,7 +7,7 @@ import java.util.concurrent.Executor;
 
 /**
  * <pre>
- *     @author: yangchong
+ *     @author yangchong
  *     blog  : https://github.com/yangchong211
  *     time  :
  *     desc  : 默认情况下，用于Java平台的交付。

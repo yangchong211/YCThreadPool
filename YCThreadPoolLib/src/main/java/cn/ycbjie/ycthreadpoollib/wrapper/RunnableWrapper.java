@@ -9,7 +9,7 @@ import cn.ycbjie.ycthreadpoollib.config.ThreadConfigs;
 
 /**
  * <pre>
- *     @author: yangchong
+ *     @author yangchong
  *     blog  : https://github.com/yangchong211
  *     time  : 2017/08/22
  *     desc  : RunnableWrapper

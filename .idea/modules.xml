@@ -3,11 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/YCThreadPool.iml" filepath="$PROJECT_DIR$/YCThreadPool.iml" />
-      <module fileurl="file://D:\GitHub\YCThreadPool\YCThreadPool.iml" filepath="D:\GitHub\YCThreadPool\YCThreadPool.iml" />
       <module fileurl="file://$PROJECT_DIR$/YCThreadPoolLib/YCThreadPoolLib.iml" filepath="$PROJECT_DIR$/YCThreadPoolLib/YCThreadPoolLib.iml" />
-      <module fileurl="file://D:\GitHub\YCThreadPool\YCThreadPoolLib\YCThreadPoolLib.iml" filepath="D:\GitHub\YCThreadPool\YCThreadPoolLib\YCThreadPoolLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\GitHub\YCThreadPool\app\app.iml" filepath="D:\GitHub\YCThreadPool\app\app.iml" />
     </modules>
   </component>
 </project>

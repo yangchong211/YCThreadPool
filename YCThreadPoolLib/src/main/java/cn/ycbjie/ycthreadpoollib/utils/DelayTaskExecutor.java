@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * <pre>
  *     @author: yangchong
- *     blog  : www.pedaily.cn
+ *     blog  : https://github.com/yangchong211
  *     time  : 2017/08/22
  *     desc  : 使用核心线程池启动延迟任务的类
  *     revise:
@@ -20,6 +20,9 @@ public final class DelayTaskExecutor {
 
     private ScheduledExecutorService dispatcher;
 
+    /**
+     * 单利模式，创建线程池对象
+     */
     private static DelayTaskExecutor instance = new DelayTaskExecutor();
 
     private DelayTaskExecutor() {
@@ -34,7 +37,7 @@ public final class DelayTaskExecutor {
         });
     }
 
-    static DelayTaskExecutor get() {
+    public static DelayTaskExecutor get() {
         return instance;
     }
 
@@ -44,7 +47,7 @@ public final class DelayTaskExecutor {
      * @param pool                      pool线程池
      * @param task                      runnable
      */
-    void postDelay(long delay, final ExecutorService pool, final Runnable task) {
+    public void postDelay(long delay, final ExecutorService pool, final Runnable task) {
         if (delay == 0) {
             //如果时间是0，那么普通开启
             pool.execute(task);
