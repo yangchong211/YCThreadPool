@@ -98,7 +98,7 @@ new Thread(new Runnable() {
 
 ### 3.封装库的具体使用
 #### 3.1 一键集成
-- compile 'cn.yc:YCThreadPoolLib:1.3.0'
+- compile 'cn.yc:YCThreadPoolLib:1.3.1'
 
 
 #### 3.2 在application中初始化库
