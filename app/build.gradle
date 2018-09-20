@@ -6,7 +6,7 @@ android {
     buildToolsVersion '25.0.3'
     defaultConfig {
         applicationId "cn.ycbjie.ycthreadpool"
-        minSdkVersion 17
+        minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -25,5 +25,5 @@ dependencies {
     //官方库
     compile 'com.android.support:appcompat-v7:25.4.0'
 //    compile project(':YCThreadPoolLib')
-    compile 'cn.yc:YCThreadPoolLib:1.3.1'
+    compile 'cn.yc:YCThreadPoolLib:1.3.2'
 }

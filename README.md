@@ -11,6 +11,12 @@
 - 3.2 在application中初始化库
 - 3.3 最简单的runnable线程调用方式
 - 3.4 最简单的异步回调
+- **4.关于版本更新情况**
+- 4.0.1 V1.0.0 更新于2016年3月9日
+- 4.0.2 V1.1.0 更新于2017年6月5日
+- 4.0.3 V1.2.0 更新于2017年11月8日
+- 4.0.4 V1.3.0 更新于2018年5月3日
+- 4.0.5 V1.3.2 更新于2018年8月25日
 
 
 
@@ -27,10 +33,10 @@
 - 代码位置：https://github.com/yangchong211/YCThreadPool
 
 #### 0.2 其他相关
-- **关于线程池关联博客有：**
-- [多线程1，线程基础知识](http://www.jcodecraeer.com/plus/view.php?aid=9597)
-- [多线程2，线程池深入理解](http://www.jcodecraeer.com/plus/view.php?aid=9604)
-- [多线程3，线程池封装库](https://blog.csdn.net/m0_37700275/article/details/79979097)
+- **关于线程，多线程，线程池关联博客有：**
+- [01，线程基础知识](http://www.jcodecraeer.com/plus/view.php?aid=9597)
+- [02，线程池深入理解](http://www.jcodecraeer.com/plus/view.php?aid=9604)
+- [03，线程池封装库](https://blog.csdn.net/m0_37700275/article/details/79979097)
 - 如果觉得前两篇线程知识太基础，可以直接忽略……主要是回顾基础知识点！
 
 
@@ -98,7 +104,7 @@ new Thread(new Runnable() {
 
 ### 3.封装库的具体使用
 #### 3.1 一键集成
-- compile 'cn.yc:YCThreadPoolLib:1.3.1'
+- compile 'cn.yc:YCThreadPoolLib:1.3.2'
 
 
 #### 3.2 在application中初始化库
