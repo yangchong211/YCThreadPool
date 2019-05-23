@@ -24,14 +24,22 @@
         android:padding="10dp"/>
 
     <TextView
-        android:id="@+id/tv_2"
+        android:id="@+id/tv_2_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="2.最简单的异步回调"
+        android:text="2.1 最简单的异步回调，时间为2秒"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 
+    <TextView
+        android:id="@+id/tv_2_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="2.2 最简单的异步回调，时间为2秒，手动stop线程池"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
 
     <TextView
         android:id="@+id/tv_3"
@@ -57,6 +65,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="5.使用线程池管理线程，查看几种不同线程池特点"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="6.线程调试测试模拟"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 

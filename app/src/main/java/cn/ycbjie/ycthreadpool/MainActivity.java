@@ -18,6 +18,7 @@ import cn.ycbjie.ycthreadpoollib.deliver.AndroidDeliver;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private int i = 0;
+    private PoolThread executor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +27,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViewById(R.id.tv_0).setOnClickListener(this);
         findViewById(R.id.tv_1).setOnClickListener(this);
-        findViewById(R.id.tv_2).setOnClickListener(this);
+        findViewById(R.id.tv_2_1).setOnClickListener(this);
+        findViewById(R.id.tv_2_2).setOnClickListener(this);
         findViewById(R.id.tv_3).setOnClickListener(this);
         findViewById(R.id.tv_4).setOnClickListener(this);
         findViewById(R.id.tv_5).setOnClickListener(this);
+        findViewById(R.id.tv_6).setOnClickListener(this);
     }
 
     @Override
@@ -42,8 +45,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_1:
                 startThread1();
                 break;
-            case R.id.tv_2:
+            case R.id.tv_2_1:
                 startThread2();
+                break;
+            case R.id.tv_2_2:
+                executor.stop();
                 break;
             case R.id.tv_3:
                 startThread3();
@@ -53,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.tv_5:
                 startActivity(new Intent(this,TestActivity.class));
+                break;
+            case R.id.tv_6:
+                startActivity(new Intent(this,ThreadActivity.class));
                 break;
             default:
                 break;
@@ -66,20 +75,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                Log.e("PoolThread   MainActivity","最简单的线程调用方式");
+                Log.e("PoolThreadMainActivity","最简单的线程调用方式");
             }
         });
     }
 
 
     private void startThread2() {
-        PoolThread executor = App.getInstance().getExecutor();
+        executor = App.getInstance().getExecutor();
         executor.setName("异步回调");
-        executor.setDelay(2,TimeUnit.MILLISECONDS);
+        executor.setDelay(2,TimeUnit.SECONDS);
         // 启动异步任务
         executor.async(new Callable<Login>(){
             @Override
             public Login call() throws Exception {
+                Log.e("PoolThreadAsyncCallback","耗时操作");
+                Thread.sleep(5000);
                 // 做一些操作
                 return null;
             }

@@ -14,13 +14,13 @@ import java.util.concurrent.TimeUnit;
 
 public class TestActivity extends AppCompatActivity implements View.OnClickListener {
 
-    int number = 20;
+    int number = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-
+        findViewById(R.id.tv_0).setOnClickListener(this);
         findViewById(R.id.tv_1).setOnClickListener(this);
         findViewById(R.id.tv_2).setOnClickListener(this);
         findViewById(R.id.tv_3).setOnClickListener(this);
@@ -30,6 +30,9 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.tv_0:
+                createThread();
+                break;
             case R.id.tv_1:
                 newFixedThreadPool();
                 break;
@@ -47,9 +50,22 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    private void createThread() {
+        for (int i = 1; i <= number; i++) {
+            final int index = i;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    String threadName = Thread.currentThread().getName();
+                    Log.e("潇湘剑雨Thread", "线程："+threadName+",正在执行第" + index + "个任务");
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
     }
 
     private void newFixedThreadPool() {
@@ -62,7 +78,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                     String threadName = Thread.currentThread().getName();
                     Log.e("潇湘剑雨newFixedThreadPool", "线程："+threadName+",正在执行第" + index + "个任务");
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -83,7 +99,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                     String threadName = Thread.currentThread().getName();
                     Log.e("潇湘剑雨 newSingleThreadExecutor", "线程："+threadName+",正在执行第" + index + "个任务");
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -98,18 +114,13 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
         for (int i = 1; i <= number; i++) {
             final int index = i;
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             cachedThreadPool.execute(new Runnable() {
                 @Override
                 public void run() {
                     String threadName = Thread.currentThread().getName();
                     Log.e("潇湘剑雨newCachedThreadPool", "线程：" + threadName + ",正在执行第" + index + "个任务");
                     try {
-                        long time = index * 500;
+                        long time =  500;
                         Thread.sleep(time);
                     } catch (InterruptedException e) {
                         e.printStackTrace();

@@ -144,7 +144,8 @@ public final class PoolThread implements Executor {
         ThreadConfigs configs = getLocalConfigs();
         configs.asyncCallback = callback;
         Runnable runnable = new RunnableWrapper(configs).setCallable(callable);
-        DelayTaskExecutor.get().postDelay(configs.delay, pool, runnable);
+        DelayTaskExecutor delayTaskExecutor = DelayTaskExecutor.get();
+        delayTaskExecutor.postDelay(configs.delay, pool, runnable);
         resetLocalConfigs();
     }
 
@@ -163,6 +164,24 @@ public final class PoolThread implements Executor {
         return result;
     }
 
+
+    public void stop(){
+        try {
+            // shutdown只是起到通知的作用
+            // 只调用shutdown方法结束线程池是不够的
+            pool.shutdown();
+            // (所有的任务都结束的时候，返回TRUE)
+            if(!pool.awaitTermination(0, TimeUnit.MILLISECONDS)){
+                // 超时的时候向线程池中所有的线程发出中断(interrupted)。
+                pool.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            // awaitTermination方法被中断的时候也中止线程池中全部的线程的执行。
+            e.printStackTrace();
+        } finally {
+            pool.shutdownNow();
+        }
+    }
 
     /**
      * 获取要创建的线程池。

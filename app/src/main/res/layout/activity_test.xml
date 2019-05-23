@@ -8,9 +8,19 @@
 
 
     <TextView
+        android:id="@+id/tv_0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0.直接创建多个线程，不适用线程池"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
+
+
+    <TextView
         android:id="@+id/tv_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="1.newFixedThreadPool"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
