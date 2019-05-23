@@ -27,7 +27,7 @@ public class App extends Application{
         instance = this;
         //初始化线程池管理器
         initThreadPool();
-        InitializeService.start(this);
+        InitializeService.start(this,"1314");
     }
 
 

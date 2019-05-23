@@ -16,13 +16,14 @@ import cn.ycbjie.ycthreadpoollib.deliver.AndroidDeliver;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private int i = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TextView tv_0 = (TextView) findViewById(R.id.tv_0);
-        tv_0.setOnClickListener(this);
+        findViewById(R.id.tv_0).setOnClickListener(this);
         findViewById(R.id.tv_1).setOnClickListener(this);
         findViewById(R.id.tv_2).setOnClickListener(this);
         findViewById(R.id.tv_3).setOnClickListener(this);
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_0:
-                startActivity(new Intent(this,TestActivity.class));
+                i++;
+                InitializeService.start(this,"yc"+i);
                 break;
             case R.id.tv_1:
                 startThread1();

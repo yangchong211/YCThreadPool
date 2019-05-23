@@ -18,6 +18,10 @@ public final class JavaDeliver implements Executor {
 
     private static JavaDeliver instance = new JavaDeliver();
 
+    /**
+     * 使用单利模式获取对象
+     * @return                      JavaDeliver对象
+     */
     public static JavaDeliver getInstance() {
         return instance;
     }
@@ -27,8 +31,10 @@ public final class JavaDeliver implements Executor {
      * @param runnable              runnable
      */
     @Override
-    public void execute(@NonNull Runnable runnable) {
-        runnable.run();
+    public void execute(Runnable runnable) {
+        if (runnable!=null){
+            runnable.run();
+        }
     }
 
 

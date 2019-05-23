@@ -4,6 +4,7 @@
 - 1.2 遇到的需求
 - 1.3 多线程通过实现Runnable弊端
 - 1.4 为什么要用线程池
+- 1.5 线程，多线程，线程池问题答疑
 - **2.封装库具有的功能**
 - 2.1 常用的功能
 - **3.封装库的具体使用**
@@ -11,32 +12,34 @@
 - 3.2 在application中初始化库
 - 3.3 最简单的runnable线程调用方式
 - 3.4 最简单的异步回调
+- 3.5 设置线程其他属性
 - **4.关于版本更新情况**
 - 4.0.1 V1.0.0 更新于2016年3月9日
 - 4.0.2 V1.1.0 更新于2017年6月5日
 - 4.0.3 V1.2.0 更新于2017年11月8日
 - 4.0.4 V1.3.0 更新于2018年5月3日
 - 4.0.5 V1.3.2 更新于2018年8月25日
-
+- **5其他说明**
+- 5.1 关于LICENSE说明
+- 5.2 关于推荐说明
 
 
 ### 0.前言介绍
 #### 0.1 基础介绍
 - 轻量级线程池封装库，支持线程执行过程中状态回调监测(包含成功，失败，异常等多种状态)；支持创建异步任务，并且可以设置线程的名称，延迟执行时间，线程优先级，回调callback等；可以根据自己需要创建自己需要的线程池，一共有四种；线程异常时，可以打印异常日志，避免崩溃。
-
-
 - 关于线程池，对于开发来说是十分重要，但是又有点难以理解或者运用。关于写线程池的博客网上已经有很多了，但是一般很少有看到的实际案例或者封装的库，许多博客也仅仅是介绍了线程池的概念，方法，或者部分源码分析，那么为了方便管理线程任务操作，所以才想结合实际案例是不是更容易理解线程池，更多可以参考代码。
-
-
 - 非常感谢aofeng，Alibaba，OpenHFT，yjfnypeu等开源工作者的奉献精神，文末有链接。查找了大量的博客，以及开源的项目，因此最后才会有了这个案例。会慢慢完善的……
-
 - 代码位置：https://github.com/yangchong211/YCThreadPool
+
 
 #### 0.2 其他相关
 - **关于线程，多线程，线程池关联博客有：**
-- [01，线程基础知识](http://www.jcodecraeer.com/plus/view.php?aid=9597)
-- [02，线程池深入理解](http://www.jcodecraeer.com/plus/view.php?aid=9604)
-- [03，线程池封装库](https://blog.csdn.net/m0_37700275/article/details/79979097)
+- [01.线程基础知识](http://www.jcodecraeer.com/plus/view.php?aid=9597)
+- [02.线程池深入理解](http://www.jcodecraeer.com/plus/view.php?aid=9604)
+- [03.线程池封装库详细文档](https://github.com/yangchong211/YCBlogs/blob/master/java/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/03.%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%B0%81%E8%A3%85%E5%BA%93.md)
+- [04.线程Thread关闭方法](https://github.com/yangchong211/YCBlogs/blob/master/java/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/05.Thread%E5%85%B3%E9%97%AD%E6%96%B9%E6%B3%95.md)
+- [05.AsyncTask异步任务类](https://github.com/yangchong211/YCBlogs/blob/master/android/%E5%A4%9A%E7%BA%BF%E7%A8%8B/03.AsyncTask%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E7%B1%BB.md)
+- [06.IntentService源码分析](https://github.com/yangchong211/YCBlogs/blob/master/android/%E5%A4%9A%E7%BA%BF%E7%A8%8B/04.IntentService%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.md)
 - 如果觉得前两篇线程知识太基础，可以直接忽略……主要是回顾基础知识点！
 
 

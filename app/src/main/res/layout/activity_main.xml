@@ -10,7 +10,7 @@
         android:id="@+id/tv_0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="0.线程池：ThreadPoolExecutor，用于测试"
+        android:text="0.使用intentService，查看日志打印"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 
@@ -42,5 +42,13 @@
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 
+    <TextView
+        android:id="@+id/tv_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="4.大量创建线程，测试性能消耗"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
 
 </LinearLayout>

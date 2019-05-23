@@ -2,6 +2,7 @@ package cn.ycbjie.ycthreadpoollib.deliver;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 
 import java.util.concurrent.Executor;
 
@@ -25,7 +26,7 @@ public final class AndroidDeliver implements Executor {
     }
 
     @Override
-    public void execute(final Runnable runnable) {
+    public void execute(@NonNull final Runnable runnable) {
         //返回应用程序的looper，它位于应用程序的主线程中。
         Looper mainLooper = Looper.getMainLooper();
         //如果当前looper就是当前主线程，那么调用run后不再执行下面的语句

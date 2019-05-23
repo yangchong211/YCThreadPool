@@ -190,7 +190,7 @@ public final class PoolThread implements Executor{
      * @param priority              优先级
      * @return
      */
-    private ExecutorService createPool(int type, int size, int priority) {
+    private synchronized ExecutorService createPool(int type, int size, int priority) {
         switch (type) {
             case ThreadBuilder.TYPE_CACHE:
                 //它是一个数量无限多的线程池，都是非核心线程，适合执行大量耗时小的任务
