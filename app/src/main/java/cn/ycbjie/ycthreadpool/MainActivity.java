@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import cn.ycbjie.ycthreadpoollib.PoolThread;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_1).setOnClickListener(this);
         findViewById(R.id.tv_2).setOnClickListener(this);
         findViewById(R.id.tv_3).setOnClickListener(this);
+        findViewById(R.id.tv_4).setOnClickListener(this);
+        findViewById(R.id.tv_5).setOnClickListener(this);
     }
 
     @Override
@@ -45,6 +48,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_3:
                 startThread3();
                 break;
+            case R.id.tv_4:
+                startThread4();
+                break;
+            case R.id.tv_5:
+                startActivity(new Intent(this,TestActivity.class));
+                break;
             default:
                 break;
         }
@@ -57,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                Log.e("MainActivity","最简单的线程调用方式");
+                Log.e("PoolThread   MainActivity","最简单的线程调用方式");
             }
         });
     }
@@ -77,17 +86,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }, new AsyncCallback<Login>() {
             @Override
             public void onSuccess(Login user) {
-                Log.e("AsyncCallback","成功");
+                Log.e("PoolThreadAsyncCallback","成功");
             }
 
             @Override
             public void onFailed(Throwable t) {
-                Log.e("AsyncCallback","失败");
+                Log.e("PoolThreadAsyncCallback","失败");
             }
 
             @Override
             public void onStart(String threadName) {
-                Log.e("AsyncCallback","开始");
+                Log.e("PoolThreadAsyncCallback","开始");
             }
         });
     }
@@ -101,9 +110,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                Log.e("MainActivity","最简单的线程调用方式");
+                Log.e("PoolThreadMainActivity","延迟时间执行任务");
             }
         });
+    }
+
+
+    private void startThread4() {
+        PoolThread executor = App.getInstance().getExecutor();
+        executor.setName("延迟时间执行任务");
+        executor.setDelay(2, TimeUnit.SECONDS);
+        executor.setDeliver(new AndroidDeliver());
+        java.util.concurrent.Future<String> submit = executor.submit(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                Log.d("PoolThreadstartThread4","startThread4");
+                return null;
+            }
+        });
+//        submit.cancel(true);
+        boolean cancelled = submit.isCancelled();
+        /*try {
+            submit.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }*/
     }
 
     @Override

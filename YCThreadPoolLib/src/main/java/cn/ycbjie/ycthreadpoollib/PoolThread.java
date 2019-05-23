@@ -30,7 +30,7 @@ import cn.ycbjie.ycthreadpoollib.wrapper.RunnableWrapper;
  *     revise:
  * </pre>
  */
-public final class PoolThread implements Executor{
+public final class PoolThread implements Executor {
 
     /**
      * 线程池

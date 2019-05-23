@@ -30,7 +30,7 @@ public final class DelayTaskExecutor {
             @Override
             public Thread newThread(Runnable runnable) {
                 Thread thread = new Thread(runnable);
-                thread.setName("YC_Delay-Task-Dispatcher");
+                thread.setName("Yc_Delay-Task-Dispatcher");
                 thread.setPriority(Thread.MAX_PRIORITY);
                 return thread;
             }

@@ -54,7 +54,9 @@ public final class RunnableWrapper implements Runnable {
      */
     @Override
     public void run() {
+        //获取线程
         Thread current = Thread.currentThread();
+        //重置线程
         ThreadToolUtils.resetThread(current, name, normal);
         //开始
         normal.onStart(name);

@@ -47,7 +47,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="4.大量创建线程，测试性能消耗"
+        android:text="4.使用submit提交事务线程"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="5.使用线程池管理线程，查看几种不同线程池特点"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 
