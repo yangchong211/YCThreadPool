@@ -321,8 +321,57 @@ executor.setCallback(new ThreadCallback() {
         }
     }
     ```
+- 自定义回调Callback接口
+    - 添加回调接口AsyncCallback和ThreadCallback
+        - 注意，这个写的自定义callback，需要添加多种状态，你可以自定义其他状态。看完了这里再回过头看看RunnableWrapper中run方法和CallableWrapper中call方法的逻辑。[博客](https://github.com/yangchong211/YCBlogs)
+    - **为什么要这样设计**
+        - 它可以让程序员准确地知道线程什么时候执行完成并获得到线程执行完成后返回的结果。
+        - AsyncCallback，在这个类中，可以看到三种状态[这个是在自定义Runnable中的run方法中实现]，并且成功时可以携带结果，在异常时还可以打印异常日志。
+        - ThreadCallback，在这个类中，可以看到三种状态[这个是在自定义Callable<T>中的call方法中实现]，并且在异常时可以打印异常日志，在开始和完成时可以打印线程名称
+    - 案例中的代码
+        ```
+        public interface ThreadCallback {
+            /**
+             * 当线程发生错误时，将调用此方法。
+             * @param threadName            正在运行线程的名字
+             * @param t                     异常
+             */
+            void onError(String threadName, Throwable t);
+
+            /**
+             * 通知用户知道它已经完成
+             * @param threadName            正在运行线程的名字
+             */
+            void onCompleted(String threadName);
+
+            /**
+             * 通知用户任务开始运行
+             * @param threadName            正在运行线程的名字
+             */
+            void onStart(String threadName);
+        }
+
+        public interface AsyncCallback<T> {
+            /**
+             * 成功时调用
+             * @param t         泛型
+             */
+            void onSuccess(T t);
+
+            /**
+             * 异常时调用
+             * @param t         异常
+             */
+            void onFailed(Throwable t);
 
 
+            /**
+             * 通知用户任务开始运行
+             * @param threadName            正在运行线程的名字
+             */
+            void onStart(String threadName);
+        }
+        ```
 
 
 
