@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,82 +21,129 @@ public class ThreadActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thread);
-//        test2();
-        test3();
+        findViewById(R.id.tv_1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                test1();
+            }
+        });
+        findViewById(R.id.tv_2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                test2();
+            }
+        });
+        findViewById(R.id.tv_3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                test3();
+            }
+        });
+        findViewById(R.id.tv_4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                test4();
+            }
+        });
     }
 
+    private void test2() {
+        // 创建3个线程对象
+        SellTicktes2 t1 = new SellTicktes2() ;
+        SellTicktes2 t2 = new SellTicktes2() ;
+        SellTicktes2 t3 = new SellTicktes2() ;
+        // 设置名称
+        t1.setName("窗口1") ;
+        t2.setName("窗口2") ;
+        t3.setName("窗口3") ;
+        // 启动线程
+        t1.start() ;
+        t2.start() ;
+        t3.start() ;
+    }
 
-    private void test1(){
-        @SuppressLint("StaticFieldLeak")
-        AsyncTask asyncTask = new AsyncTask<Void, Void, ArrayList<String>>() {
-            /**
-             * 开始执行后台任务
-             * @param voids                 void
-             * @return                      集合
-             */
-            @Override
-            protected ArrayList<String> doInBackground(Void... voids) {
-                for (int i=0 ; i<10000 ; i++){
-
+    public static class SellTicktes2 extends Thread {
+        private static int num = 100 ;
+        @Override
+        public void run() {
+            // 模拟售票
+            while(true) {
+                if( num > 0 ) {
+                    try {
+                        Thread.sleep(100) ;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("test2"+Thread.currentThread().getName() + "正在出售" + (num--) + "张票");
                 }
-                return null;
             }
-
-            /**
-             * 开始执行后台任务之后
-             * @param list                  list
-             */
-            @Override
-            protected void onPostExecute(ArrayList<String> list) {
-                super.onPostExecute(list);
-            }
-
-            /**
-             * 开始执行后台任务之前
-             */
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
-
-            /**
-             * 进度更新中，会被多次调用
-             * @param values                values
-             */
-            @Override
-            protected void onProgressUpdate(Void... values) {
-                super.onProgressUpdate(values);
-            }
-        }.execute();
+        }
     }
+
+    private void test1() {
+        /**
+         * 需求：某电影院目前正在上映贺岁大片，共有100张票，而它有3个售票窗口售票，请设计一个程序模拟该电影院售票。
+         */
+        // 创建3个线程对象
+        SellTicktes t1 = new SellTicktes() ;
+        SellTicktes t2 = new SellTicktes() ;
+        SellTicktes t3 = new SellTicktes() ;
+        // 设置名称
+        t1.setName("窗口1") ;
+        t2.setName("窗口2") ;
+        t3.setName("窗口3") ;
+        // 启动线程
+        t1.start() ;
+        t2.start() ;
+        t3.start() ;
+    }
+
+    public static class SellTicktes extends Thread {
+        private static int num = 100 ;
+        @Override
+        public void run() {
+            /**
+             * 定义总票数
+             *
+             * 如果我们把票数定义成了局部变量,那么表示的意思是每一个窗口出售了各自的100张票; 而我们的需求是: 总共有100张票
+             * 而这100张票要被3个窗口出售; 因此我们就不能把票数定义成局部变量,只能定义成成员变量
+             */
+            // 模拟售票
+            while(true) {
+                if( num > 0 ) {
+                    System.out.println("test1"+Thread.currentThread().getName() + "正在出售" + (num--) + "张票");
+                }
+            }
+        }
+    }
+
 
     /**
      * 现在有T1、T2、T3三个线程，你怎样保证T2在T1执行完后执行，T3在T2执行完后执行？
      */
-    private void test2(){
+    private void test4(){
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d("线程执行","Thread1");
+                System.out.println("test4"+Thread.currentThread().getName() + "线程执行" + "Thread1");
             }
         });
         Thread t2 = new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d("线程执行","Thread2");
+                System.out.println("test4"+Thread.currentThread().getName() + "线程执行" + "Thread2");
             }
         });
         Thread t3 = new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d("线程执行","Thread3");
+                System.out.println("test4"+Thread.currentThread().getName() + "线程执行" + "Thread3");
             }
         });
 
         t1.start();
         t2.start();
         t3.start();
-
 
         try {
             t1.join();
