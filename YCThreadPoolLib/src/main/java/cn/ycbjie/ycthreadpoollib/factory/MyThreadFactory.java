@@ -40,6 +40,7 @@ public class MyThreadFactory implements ThreadFactory {
 
     @Override
     public Thread newThread(@NonNull Runnable runnable) {
+        // 创建线程
         Thread thread = new Thread(runnable);
         // 设置线程优先级
         thread.setPriority(priority);
