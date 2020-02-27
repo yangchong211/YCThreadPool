@@ -45,4 +45,23 @@
         android:background="@color/colorAccent"
         android:text="4.多线程执行之保证顺序"/>
 
+
+    <TextView
+        android:id="@+id/tv_51"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/colorAccent"
+        android:text="5.1 多线程之volatile测试1"/>
+
+    <TextView
+        android:id="@+id/tv_52"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/colorAccent"
+        android:text="5.2 多线程之volatile测试2"/>
+
 </LinearLayout>

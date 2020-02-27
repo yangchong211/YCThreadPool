@@ -45,6 +45,18 @@ public class ThreadActivity extends AppCompatActivity {
                 test4();
             }
         });
+        findViewById(R.id.tv_51).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                test51();
+            }
+        });
+        findViewById(R.id.tv_52).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                test52();
+            }
+        });
     }
 
     private void test2() {
@@ -250,6 +262,55 @@ public class ThreadActivity extends AppCompatActivity {
             } finally {
                 lock.unlock();
             }
+        }
+    }
+
+
+
+    /**-----------------------------------测试volatile关键字---------------------------------------------*/
+
+    static int i = 10;
+    public void test51(){
+//        MyThread51 t1 = new MyThread51();
+//        MyThread51 t2 = new MyThread51();
+//        t1.start() ;
+//        try {
+//            t1.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        t2.start() ;
+
+
+        for (int i=0 ; i<10 ; i++){
+            MyThread51 t1 = new MyThread51();
+            t1.start() ;
+        }
+    }
+
+    static class MyThread51 extends Thread {
+        @Override
+        public void run() {
+            i++;
+            System.out.println("yc---------" + this.getName()+"----"+i);
+        }
+    }
+
+
+    static volatile int j = 10;
+
+    public void test52(){
+        for (int i=0 ; i<10 ; i++){
+            MyThread52 t1 = new MyThread52();
+            t1.start() ;
+        }
+    }
+
+    static class MyThread52 extends Thread {
+        @Override
+        public void run() {
+            j++;
+            System.out.println("yc---------" + this.getName()+"----"+j);
         }
     }
 

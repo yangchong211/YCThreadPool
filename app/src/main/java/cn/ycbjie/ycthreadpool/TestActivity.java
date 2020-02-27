@@ -50,6 +50,9 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * 最普通创建线程的方式
+     */
     private void createThread() {
         for (int i = 1; i <= number; i++) {
             final int index = i;
