@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GitHub-YCThreadPool.iml" filepath="$PROJECT_DIR$/.idea/modules/GitHub-YCThreadPool.iml" group="YCThreadPool" />
       <module fileurl="file://$PROJECT_DIR$/.idea/YCThreadPool.iml" filepath="$PROJECT_DIR$/.idea/YCThreadPool.iml" />
-      <module fileurl="file://$PROJECT_DIR$/YCThreadPool.iml" filepath="$PROJECT_DIR$/YCThreadPool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/YCThreadPool-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/YCThreadPool-app.iml" group="YCThreadPool/app" />
       <module fileurl="file://$PROJECT_DIR$/YCThreadPoolLib/YCThreadPoolLib.iml" filepath="$PROJECT_DIR$/YCThreadPoolLib/YCThreadPoolLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/YCThreadPoolLib/cn.yc-YCThreadPoolLib.iml" filepath="$PROJECT_DIR$/.idea/modules/YCThreadPoolLib/cn.yc-YCThreadPoolLib.iml" group="YCThreadPool/YCThreadPoolLib" />
     </modules>
   </component>
 </project>

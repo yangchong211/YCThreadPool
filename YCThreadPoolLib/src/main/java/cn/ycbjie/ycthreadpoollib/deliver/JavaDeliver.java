@@ -17,6 +17,7 @@ limitations under the License.
 package cn.ycbjie.ycthreadpoollib.deliver;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.concurrent.Executor;
 
@@ -47,7 +48,7 @@ public final class JavaDeliver implements Executor {
      * @param runnable              runnable
      */
     @Override
-    public void execute(Runnable runnable) {
+    public void execute(@Nullable Runnable runnable) {
         if (runnable!=null){
             runnable.run();
         }
