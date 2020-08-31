@@ -2,6 +2,7 @@ package cn.ycbjie.ycthreadpool;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.View;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 
@@ -31,10 +33,12 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_0:
+                //最普通方式
                 createThread();
                 break;
             case R.id.tv_1:
                 newFixedThreadPool();
+                //newFixedThreadPool1();
                 break;
             case R.id.tv_2:
                 newSingleThreadExecutor();
@@ -71,11 +75,33 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * 由于newFixedThreadPool只有核心线程，并且这些线程都不会被回收，也就是它能够更快速的响应外界请求
+     */
     private void newFixedThreadPool() {
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
         for (int i = 1; i <= number; i++) {
             final int index = i;
             fixedThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    String threadName = Thread.currentThread().getName();
+                    Log.e("潇湘剑雨newFixedThreadPool", "线程："+threadName+",正在执行第" + index + "个任务");
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    }
+
+    private void newFixedThreadPool1() {
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
+        for (int i = 1; i <= number; i++) {
+            final int index = i;
+            fixedThreadPool.submit(new Runnable() {
                 @Override
                 public void run() {
                     String threadName = Thread.currentThread().getName();
@@ -111,13 +137,55 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void newSingleThreadExecutor1() {
+        ExecutorService singleThreadPool = Executors.newSingleThreadExecutor();
+        for (int i = 1; i <= number; i++) {
+            final int index = i;
+            singleThreadPool.submit(new Runnable() {
+                @SuppressLint("LongLogTag")
+                @Override
+                public void run() {
+                    String threadName = Thread.currentThread().getName();
+                    Log.e("潇湘剑雨 newSingleThreadExecutor", "线程："+threadName+",正在执行第" + index + "个任务");
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    }
 
 
+    /**
+     * 缓存线程池，
+     */
     private void newCachedThreadPool() {
         ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
         for (int i = 1; i <= number; i++) {
             final int index = i;
             cachedThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    String threadName = Thread.currentThread().getName();
+                    Log.e("潇湘剑雨newCachedThreadPool", "线程：" + threadName + ",正在执行第" + index + "个任务");
+                    try {
+                        long time =  500;
+                        Thread.sleep(time);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    }
+
+    private void newCachedThreadPool1() {
+        ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+        for (int i = 1; i <= number; i++) {
+            final int index = i;
+            cachedThreadPool.submit(new Runnable() {
                 @Override
                 public void run() {
                     String threadName = Thread.currentThread().getName();
@@ -155,5 +223,13 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         }, 1, 2, TimeUnit.SECONDS);
     }
 
+    private void test(){
+        ThreadFactory threadFactory = new ThreadFactory() {
+            @Override
+            public Thread newThread(@NonNull Runnable runnable) {
+                return null;
+            }
+        };
+    }
 
 }

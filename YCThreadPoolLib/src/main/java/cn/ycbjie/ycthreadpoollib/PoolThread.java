@@ -135,6 +135,7 @@ public final class PoolThread implements Executor {
      * 这个是实现接口Executor中的execute方法
      * 在将来的某个时间执行给定的命令。该命令可以在新线程、池线程或调用线程中执行，这取决于{@code Executor}实现。
      * 提交任务无返回值
+     * 当我们使用execute来提交任务时，由于execute方法没有返回值，所以说我们也就无法判定任务是否被线程池执行成功。
      * @param runnable              task，注意添加非空注解
      */
     @Override
@@ -168,14 +169,16 @@ public final class PoolThread implements Executor {
     /**
      * 发射任务
      * 提交任务有返回值
+     * 当我们使用submit来提交任务时,它会返回一个future,我们就可以通过这个future来判断任务是否执行成功，
+     * 还可以通过future的get方法来获取返回值。如果子线程任务没有完成，get方法会阻塞住直到任务完成，
+     * 而使用get(long timeout, TimeUnit unit)方法则会阻塞一段时间后立即返回，这时候有可能任务并没有执行完。
      * @param callable              callable
      * @param <T>                   type
      * @return {@link Future}
      */
     public <T> Future<T> submit (Callable<T> callable) {
-        Future<T> result;
         callable = new CallableWrapper<>(getLocalConfigs(), callable);
-        result = pool.submit(callable);
+        Future<T> result = pool.submit(callable);
         resetLocalConfigs();
         return result;
     }
@@ -183,6 +186,8 @@ public final class PoolThread implements Executor {
 
     /**
      * 关闭线程池操作
+     * shutdown原理：将线程池状态设置成SHUTDOWN状态，然后中断所有没有正在执行任务的线程。
+     * shutdownNow原理：将线程池的状态设置成STOP状态，然后中断所有任务(包括正在执行的)的线程，并返回等待执行任务的列表。
      */
     public void stop(){
         try {

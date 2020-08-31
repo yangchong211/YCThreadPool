@@ -32,6 +32,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_4).setOnClickListener(this);
         findViewById(R.id.tv_5).setOnClickListener(this);
         findViewById(R.id.tv_6).setOnClickListener(this);
+
+
+        // 计算可使用的最大内存
+        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+        // 取四分之一的可用内存作为缓存
+        final int cacheSize = maxMemory / 4;
     }
 
     @Override
@@ -154,6 +160,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+    }
+
+
+
+    private void startThread5() {
+        PoolThread executor = App.getInstance().getExecutor();
+        //设置为当前的任务设置线程名
+        executor.setName("延迟时间执行任务");
+        //设置当前任务的延迟时间
+        executor.setDelay(2, TimeUnit.SECONDS);
+        //设置当前任务的线程传递
+        executor.setDeliver(new AndroidDeliver());
         Future<String> submit = executor.submit(new Callable<String>() {
             @Override
             public String call() throws Exception {

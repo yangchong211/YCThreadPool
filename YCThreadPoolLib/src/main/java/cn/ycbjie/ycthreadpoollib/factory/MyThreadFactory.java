@@ -32,7 +32,25 @@ import java.util.concurrent.ThreadFactory;
  */
 public class MyThreadFactory implements ThreadFactory {
 
+    /**
+     * ThreadFactory
+     * ThreadFactory是一个接口，里面只有一个newThread方法
+     * 线程工厂，为线程池提供新线程的创建
+     */
+
     private int priority;
+
+    /**
+     * 构造方法，默认为优先级是：Thread.NORM_PRIORITY
+     */
+    public MyThreadFactory() {
+        this.priority = Thread.NORM_PRIORITY;
+    }
+
+    /**
+     * 构造方法
+     * @param priority                  优先级
+     */
     public MyThreadFactory(int priority) {
         this.priority = priority;
     }
