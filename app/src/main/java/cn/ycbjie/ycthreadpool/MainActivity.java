@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_2_2).setOnClickListener(this);
         findViewById(R.id.tv_3).setOnClickListener(this);
         findViewById(R.id.tv_4).setOnClickListener(this);
+        findViewById(R.id.tv_4_2).setOnClickListener(this);
         findViewById(R.id.tv_5).setOnClickListener(this);
         findViewById(R.id.tv_6).setOnClickListener(this);
 
@@ -61,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.tv_4:
                 startThread4();
+                break;
+            case R.id.tv_4_2:
+                startThread5();
                 break;
             case R.id.tv_5:
                 startActivity(new Intent(this,TestActivity.class));
@@ -140,24 +144,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         executor.setDelay(2, TimeUnit.SECONDS);
         //设置当前任务的线程传递
         executor.setDeliver(new AndroidDeliver());
-        //关闭线程池操作
-//        executor.stop();
-        //销毁的时候可以调用这个方法
-//        executor.close();
+        executor.submit(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                Log.d("PoolThreadstartThread4","startThread4---call");
+                Thread.sleep(2000);
+                String str = "小杨逗比";
+                return str;
+            }
+        });
         executor.setCallback(new ThreadCallback() {
             @Override
             public void onError(String threadName, Throwable t) {
-
+                Log.d("PoolThreadstartThread4","startThread4---onError");
             }
 
             @Override
             public void onCompleted(String threadName) {
-
+                Log.d("PoolThreadstartThread4","startThread4---onCompleted");
             }
 
             @Override
             public void onStart(String threadName) {
-
+                Log.d("PoolThreadstartThread4","startThread4---onStart");
             }
         });
     }
@@ -175,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Future<String> submit = executor.submit(new Callable<String>() {
             @Override
             public String call() throws Exception {
-                Log.d("PoolThreadstartThread4","startThread4---call");
+                Log.d("PoolThreadstartThread5","startThread5---call");
                 Thread.sleep(2000);
                 String str = "小杨逗比";
                 return str;
@@ -183,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         try {
             String result = submit.get();
-            Log.d("PoolThreadstartThread4","startThread4-----"+result);
+            Log.d("PoolThreadstartThread5","startThread5-----"+result);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
