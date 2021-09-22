@@ -14,7 +14,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 
-public class TestActivity extends AppCompatActivity implements View.OnClickListener {
+public class ExecutorsTestActivity extends AppCompatActivity implements View.OnClickListener {
 
     int number = 200;
 
@@ -60,6 +60,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     private void createThread() {
         for (int i = 1; i <= number; i++) {
             final int index = i;
+            //线程抢占资源，会占用cpu
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -73,6 +74,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }).start();
         }
+        //todo 模拟线程导致OOM操作
     }
 
     /**
@@ -97,26 +99,6 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void newFixedThreadPool1() {
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
-        for (int i = 1; i <= number; i++) {
-            final int index = i;
-            fixedThreadPool.submit(new Runnable() {
-                @Override
-                public void run() {
-                    String threadName = Thread.currentThread().getName();
-                    Log.e("潇湘剑雨newFixedThreadPool", "线程："+threadName+",正在执行第" + index + "个任务");
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-    }
-
-
     private void newSingleThreadExecutor() {
         ExecutorService singleThreadPool = Executors.newSingleThreadExecutor();
         for (int i = 1; i <= number; i++) {
@@ -136,27 +118,6 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
             });
         }
     }
-
-    private void newSingleThreadExecutor1() {
-        ExecutorService singleThreadPool = Executors.newSingleThreadExecutor();
-        for (int i = 1; i <= number; i++) {
-            final int index = i;
-            singleThreadPool.submit(new Runnable() {
-                @SuppressLint("LongLogTag")
-                @Override
-                public void run() {
-                    String threadName = Thread.currentThread().getName();
-                    Log.e("潇湘剑雨 newSingleThreadExecutor", "线程："+threadName+",正在执行第" + index + "个任务");
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-    }
-
 
     /**
      * 缓存线程池，
@@ -181,27 +142,6 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void newCachedThreadPool1() {
-        ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
-        for (int i = 1; i <= number; i++) {
-            final int index = i;
-            cachedThreadPool.submit(new Runnable() {
-                @Override
-                public void run() {
-                    String threadName = Thread.currentThread().getName();
-                    Log.e("潇湘剑雨newCachedThreadPool", "线程：" + threadName + ",正在执行第" + index + "个任务");
-                    try {
-                        long time =  500;
-                        Thread.sleep(time);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-    }
-
-
     private void newScheduledThreadPool() {
         ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(5);
         //延迟2秒后执行该任务
@@ -223,13 +163,5 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         }, 1, 2, TimeUnit.SECONDS);
     }
 
-    private void test(){
-        ThreadFactory threadFactory = new ThreadFactory() {
-            @Override
-            public Thread newThread(@NonNull Runnable runnable) {
-                return null;
-            }
-        };
-    }
 
 }

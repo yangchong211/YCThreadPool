@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TestActivity"/>
+        <activity android:name=".ExecutorsTestActivity"/>
         <activity android:name=".ThreadActivity"/>
         <service android:name=".InitializeService"/>
     </application>

@@ -1,14 +1,10 @@
 package cn.ycbjie.ycthreadpool;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -21,7 +17,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-public class TestCountActivity extends AppCompatActivity implements View.OnClickListener {
+public class ThreadPoolExecutorActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     @Override
@@ -80,6 +76,12 @@ public class TestCountActivity extends AppCompatActivity implements View.OnClick
     }
 
     // 初始化线程池
+    // corePoolSize 线程池中的核心线程数
+    // maximumPoolSize  线程最大容量数，达到最大值后新创建的线程会被阻塞
+    // keepAliveTime  非核心线程闲置时的超时时长，对于非核心线程，闲置时间超过这个时间，非核心线程就会被回收。
+    // unit 时间单位
+    // workQueue 工作队列
+    // handler 处理任务的
     private static ThreadPoolExecutor threadPool = new ThreadPoolExecutor(
             8, 8, 10,
             TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(1000),
@@ -215,7 +217,7 @@ public class TestCountActivity extends AppCompatActivity implements View.OnClick
          *IO操作
          */
         public void readAndWrite() throws IOException {
-            InputStream in = TestCountActivity.this.getAssets().open("evaluation.config");
+            InputStream in = ThreadPoolExecutorActivity.this.getAssets().open("evaluation.config");
             int size = in.available();
             byte[] buffer = new byte[size];
             in.read(buffer);

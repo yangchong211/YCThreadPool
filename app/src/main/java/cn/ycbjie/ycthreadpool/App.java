@@ -3,6 +3,7 @@ package cn.ycbjie.ycthreadpool;
 import android.app.Application;
 
 import cn.ycbjie.ycthreadpoollib.PoolThread;
+import cn.ycbjie.ycthreadpoollib.ScheduleTask;
 
 public class App extends Application{
 
@@ -28,6 +29,13 @@ public class App extends Application{
         //初始化线程池管理器
         initThreadPool();
         InitializeService.start(this,"1314");
+        ScheduleTask.getInstance().schedule(new Runnable() {
+            @Override
+            public void run() {
+                //做一些耗时任务
+
+            }
+        });
     }
 
 
