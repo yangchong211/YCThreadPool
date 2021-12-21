@@ -16,7 +16,8 @@ limitations under the License.
 
 package cn.ycbjie.ycthreadpoollib.factory;
 
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import java.util.concurrent.ThreadFactory;
 

@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/YCThreadPool.iml" filepath="$PROJECT_DIR$/.idea/modules/YCThreadPool.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/YCThreadPoolLib/YCThreadPool.YCThreadPoolLib.iml" filepath="$PROJECT_DIR$/.idea/modules/YCThreadPoolLib/YCThreadPool.YCThreadPoolLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/YCThreadPoolLib/YCThreadPool.ThreadPoolLib.iml" filepath="$PROJECT_DIR$/.idea/modules/YCThreadPoolLib/YCThreadPool.ThreadPoolLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/taskscheduler/YCThreadPool.ThreadTaskLib.iml" filepath="$PROJECT_DIR$/.idea/modules/taskscheduler/YCThreadPool.ThreadTaskLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/YCThreadPool.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/YCThreadPool.app.iml" />
     </modules>
   </component>

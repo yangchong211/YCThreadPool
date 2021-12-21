@@ -17,7 +17,8 @@ limitations under the License.
 package cn.ycbjie.ycthreadpoollib;
 
 
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
