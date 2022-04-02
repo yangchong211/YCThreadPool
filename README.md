@@ -407,14 +407,6 @@ executor.setCallback(new ThreadCallback() {
 ![image](https://upload-images.jianshu.io/upload_images/4432347-7100c8e5a455c3ee.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
-#### 01.关于博客汇总链接
-- 1.[技术博客汇总](https://www.jianshu.com/p/614cb839182c)
-- 2.[开源项目汇总](https://blog.csdn.net/m0_37700275/article/details/80863574)
-- 3.[生活博客汇总](https://blog.csdn.net/m0_37700275/article/details/79832978)
-- 4.[喜马拉雅音频汇总](https://www.jianshu.com/p/f665de16d1eb)
-- 5.[其他汇总](https://www.jianshu.com/p/53017c3fc75d)
-
-
 
 #### 02.关于我的博客
 - github：https://github.com/yangchong211
@@ -434,6 +426,7 @@ executor.setCallback(new ThreadCallback() {
 #### 03.勘误及提问
 - 如果有疑问或者发现错误，可以在相应的 issues 进行提问或勘误。如果喜欢或者有所启发，欢迎star，对作者也是一种鼓励。
 
+    
 
 #### 04.关于LICENSE
 ```
