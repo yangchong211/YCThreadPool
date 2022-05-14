@@ -104,7 +104,7 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
     }
 
     /**
-     * 使用HandlerThread和handler处理消息
+     * 使用Handler和handler处理消息
      *
      * @return MainThreadExecutor
      */
