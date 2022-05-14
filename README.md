@@ -91,7 +91,8 @@
 #### 5.1 一键集成
 - 如下所示
     ```
-    implementation 'com.github.yangchong211.YCThreadPool:ThreadPoolLib:1.3.5'
+    implementation 'com.github.yangchong211.YCThreadPool:ThreadPoolLib:1.3.7'
+    implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.7'
     ```
 
 #### 5.2 在application中初始化库
