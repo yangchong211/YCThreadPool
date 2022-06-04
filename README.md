@@ -91,8 +91,10 @@
 #### 5.1 一键集成
 - 如下所示
     ```
-    implementation 'com.github.yangchong211.YCThreadPool:ThreadPoolLib:1.3.7'
-    implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.7'
+    //异步线程池库，简易版本
+    implementation 'com.github.yangchong211.YCThreadPool:ThreadPoolLib:1.3.8'
+    //简易版本线程池库
+    implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.8'
     ```
 
 #### 5.2 在application中初始化库
@@ -243,35 +245,35 @@
 
 #### 5.6 其他api说明
 - api说明
-```
-//设置为当前的任务设置线程名
-executor.setName("延迟时间执行任务");
-//设置当前任务的延迟时间
-executor.setDelay(2, TimeUnit.SECONDS);
-//设置当前任务的线程传递
-executor.setDeliver(new AndroidDeliver());
-
-//关闭线程池操作
-executor.stop();
-//销毁的时候可以调用这个方法
-executor.close();
-executor.setCallback(new ThreadCallback() {
-    @Override
-    public void onError(String threadName, Throwable t) {
-
-    }
-
-    @Override
-    public void onCompleted(String threadName) {
-
-    }
-
-    @Override
-    public void onStart(String threadName) {
-
-    }
-});
-```
+    ```
+    //设置为当前的任务设置线程名
+    executor.setName("延迟时间执行任务");
+    //设置当前任务的延迟时间
+    executor.setDelay(2, TimeUnit.SECONDS);
+    //设置当前任务的线程传递
+    executor.setDeliver(new AndroidDeliver());
+    
+    //关闭线程池操作
+    executor.stop();
+    //销毁的时候可以调用这个方法
+    executor.close();
+    executor.setCallback(new ThreadCallback() {
+        @Override
+        public void onError(String threadName, Throwable t) {
+    
+        }
+    
+        @Override
+        public void onCompleted(String threadName) {
+    
+        }
+    
+        @Override
+        public void onStart(String threadName) {
+    
+        }
+    });
+    ```
 
 
 
