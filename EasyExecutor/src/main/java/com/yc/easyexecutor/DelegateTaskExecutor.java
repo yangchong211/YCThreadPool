@@ -1,7 +1,11 @@
 package com.yc.easyexecutor;
 
+import android.os.Handler;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 
 import java.util.concurrent.Executor;
 
@@ -31,6 +35,16 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
         public void execute(Runnable command) {
             if (command != null) {
                 getInstance().postToMainThread(command);
+            }
+        }
+    };
+
+    @NonNull
+    private static final Executor sCoreThreadExecutor = new Executor() {
+        @Override
+        public void execute(Runnable command) {
+            if (command != null) {
+                getInstance().executeOnCore(command);
             }
         }
     };
@@ -78,6 +92,13 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
     }
 
     @Override
+    public void executeOnCore(@NonNull Runnable runnable) {
+        if (runnable != null) {
+            mDelegate.executeOnCore(runnable);
+        }
+    }
+
+    @Override
     public void executeOnDiskIO(@Nullable Runnable runnable) {
         if (runnable != null) {
             mDelegate.executeOnDiskIO(runnable);
@@ -99,18 +120,40 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
     }
 
     @Override
+    public Handler getMainHandler() {
+        return mDelegate.getMainHandler();
+    }
+
+    @Override
+    public void postIoHandler(@NonNull Runnable runnable) {
+        if (runnable != null) {
+            mDelegate.postIoHandler(runnable);
+        }
+    }
+
+    @Override
     public void executeOnMainThread(@NonNull Runnable runnable) {
         super.executeOnMainThread(runnable);
     }
 
     /**
-     * 使用Handler和handler处理消息
+     * 使用HandlerThread和handler处理消息
      *
      * @return MainThreadExecutor
      */
     @NonNull
     public Executor getMainThreadExecutor() {
         return sMainThreadExecutor;
+    }
+
+    /**
+     * 获取核心线程池，主要是执行一些核心任务，比如初始化相关操作
+     *
+     * @return CoreThreadExecutor
+     */
+    @NonNull
+    public Executor getCoreThreadExecutor() {
+        return sCoreThreadExecutor;
     }
 
     /**
@@ -142,4 +185,45 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
     public boolean isMainThread() {
         return mDelegate.isMainThread();
     }
+
+
+    /**
+     * 执行有生命周期的任务
+     */
+    public Runnable postToMainThread(LifecycleOwner lifecycleOwner, Runnable runnable) {
+        LifecycleRunnable lifecycleRunnableDelegate = new LifecycleRunnable(lifecycleOwner,
+                getMainHandler(), Lifecycle.Event.ON_DESTROY,runnable);
+        mDelegate.postToMainThread(lifecycleRunnableDelegate);
+        return lifecycleRunnableDelegate;
+    }
+
+
+    /**
+     * 执行有生命周期的任务,指定Lifecycle.Event
+     */
+    public Runnable postToMainThread(LifecycleOwner lifecycleOwner,
+                                         Lifecycle.Event targetEvent,
+                                         Runnable runnable) {
+        LifecycleRunnable lifecycleRunnableDelegate = new LifecycleRunnable(lifecycleOwner,
+                getMainHandler(),targetEvent,runnable);
+        mDelegate.postToMainThread(lifecycleRunnableDelegate);
+        return lifecycleRunnableDelegate;
+    }
+
+
+    public void postToMainThread(Runnable runnable,long delayed) {
+        getMainHandler().postDelayed(runnable,delayed);
+    }
+
+    public Runnable postToMainThread(LifecycleOwner lifecycleOwner,Runnable runnable,long delayed) {
+        LifecycleRunnable lifecycleRunnableDelegate = new LifecycleRunnable(lifecycleOwner,
+                getMainHandler(),Lifecycle.Event.ON_DESTROY,runnable);
+        getMainHandler().postDelayed(lifecycleRunnableDelegate,delayed);
+        return lifecycleRunnableDelegate;
+    }
+
+    public void removeUICallback(Runnable runnable) {
+        getMainHandler().removeCallbacks(runnable);
+    }
+
 }
